@@ -1,7 +1,14 @@
 import { LitElement, html, css } from 'lit-element';
+
+import { IO } from './io.js';
 import './elements/index.js';
 
 class XmasCards extends LitElement {
+  constructor() {
+    super();
+    IO.initialize();
+  }
+
   static get styles() {
     return [
       css`

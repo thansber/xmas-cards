@@ -1,8 +1,10 @@
 const rootKey = '_XMAS_CARDS_';
 const props = [
-  { name: 'connectionId', initialValue: 1 },
+  { name: 'connectionId', initialValue: 0 },
   { name: 'connections', initialValue: [] },
-  { name: 'groupId', initialValue: 1 },
+  // eslint-disable-next-line no-undef
+  { name: 'currentYear', initialValue: dayjs().year() },
+  { name: 'groupId', initialValue: 0 },
   { name: 'groups', initialValue: [] },
 ];
 

@@ -1,12 +1,20 @@
 import { LitElement, html, css } from 'lit-element';
 
+import { connectionCss } from '../css/connection.css';
+
 class ConnectionsElement extends LitElement {
   static get styles() {
     return [
+      connectionCss,
       css`
         :host {
           display: block;
-          margin-top: 2.5rem;
+        }
+
+        #headings {
+          display: flex;
+          font-size: 175%;
+          margin-bottom: 1rem;
         }
       `,
     ];

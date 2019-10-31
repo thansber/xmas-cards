@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
 
-import { IO } from '../io';
 import { buttonCss } from '../css/button.css';
 
 class ClearAllElement extends LitElement {

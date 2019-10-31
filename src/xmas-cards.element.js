@@ -14,7 +14,7 @@ class XmasCards extends LitElement {
     return [
       css`
         :host {
-          background-color: rgb(0, 64, 0);
+          background-color: rgb(0, 32, 0);
           bottom: 0;
           color: white;
           left: 0;
@@ -47,7 +47,7 @@ class XmasCards extends LitElement {
     return html`
       <xmas-add-connection @addConnection="${this.onAddConnection}"></xmas-add-connection>
 
-      <xmas-connections .connections="${this.data.connections}"></xmas-connections>
+      <xmas-groups .groups="${this.data.groups}"></xmas-groups>
 
       <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
     `;

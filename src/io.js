@@ -51,6 +51,8 @@ const createDefaultGroup = connectionId => {
   addConnectionToGroup(connectionId, defaultGroupId);
 };
 
+const findConnection = connectionId =>
+  read().connections.find(connection => connection.id === connectionId);
 const findDefaultGroup = () => read().groups.find(group => group.isDefault);
 const findGroup = groupId => read().groups.find(group => group.id === groupId);
 
@@ -100,6 +102,7 @@ const nukeEverything = () => {
 };
 
 export const IO = {
+  findConnection,
   initialize,
   newConnection,
   newGroup,

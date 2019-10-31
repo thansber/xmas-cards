@@ -5,7 +5,7 @@ export const buttonCss = css`
     background-color: rgb(128, 0, 0);
     border: 0;
     border-radius: 0.25rem;
-    color: rgb(160, 160, 160);
+    color: rgb(192, 192, 192);
     cursor: pointer;
     font-size: 150%;
     padding: 0.45rem 1rem;

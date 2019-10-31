@@ -15,6 +15,7 @@ class XmasCards extends LitElement {
         :host {
           background-color: rgb(0, 64, 0);
           bottom: 0;
+          color: white;
           left: 0;
           padding: 1rem;
           position: absolute;

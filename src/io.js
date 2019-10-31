@@ -24,6 +24,25 @@ const initialize = () => {
   write(data);
 };
 
+const newConnection = name => {
+  const data = read();
+  const nextConnectionId = data.connectionId + 1;
+  write({
+    connectionId: nextConnectionId,
+    connections: [
+      ...data.connections,
+      {
+        id: data.connectionId + 1,
+        name,
+        ping: {
+          year: data.currentYear,
+        },
+      },
+    ],
+  });
+};
+
 export const IO = {
   initialize,
+  newConnection,
 };

@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
+import { IO } from '../io.js';
+
 class AddConnection extends LitElement {
   constructor() {
     super();
@@ -73,6 +75,8 @@ class AddConnection extends LitElement {
     if (!name) {
       this.nameError = true;
       this.nameInput.focus();
+    } else {
+      IO.newConnection(name);
     }
   }
 

@@ -7,6 +7,7 @@ class XmasCards extends LitElement {
   constructor() {
     super();
     IO.initialize();
+    this.data = IO.read();
   }
 
   static get styles() {
@@ -27,12 +28,28 @@ class XmasCards extends LitElement {
   }
 
   static get properties() {
-    return {};
+    return {
+      data: { type: Object },
+    };
+  }
+
+  onAddConnection(e) {
+    IO.newConnection(e.detail.name);
+    this.data = IO.read();
+  }
+
+  onClearAll() {
+    IO.nukeEverything();
+    this.data = IO.read();
   }
 
   render() {
     return html`
-      <xmas-add-connection></xmas-add-connection>
+      <xmas-add-connection @addConnection="${this.onAddConnection}"></xmas-add-connection>
+
+      <xmas-connections .connections="${this.data.connections}"></xmas-connections>
+
+      <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
     `;
   }
 }

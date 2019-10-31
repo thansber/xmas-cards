@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
-import { IO } from '../io.js';
+import { buttonCss } from '../css/button.css';
 
 class AddConnection extends LitElement {
   constructor() {
@@ -11,6 +11,7 @@ class AddConnection extends LitElement {
 
   static get styles() {
     return [
+      buttonCss,
       css`
         :host {
         }
@@ -43,20 +44,6 @@ class AddConnection extends LitElement {
           position: absolute;
           right: 1.5rem;
         }
-
-        button {
-          background-color: rgb(128, 0, 0);
-          border: 0;
-          border-radius: 0.25rem;
-          color: rgb(160, 160, 160);
-          cursor: pointer;
-          font-size: 150%;
-          padding: 0.45rem 1rem;
-        }
-
-        button:active {
-          top: 1px;
-        }
       `,
     ];
   }
@@ -76,7 +63,7 @@ class AddConnection extends LitElement {
       this.nameError = true;
       this.nameInput.focus();
     } else {
-      IO.newConnection(name);
+      this.dispatchEvent(new CustomEvent('addConnection', { detail: { name } }));
     }
   }
 

@@ -24,15 +24,48 @@ const initialize = () => {
   write(data);
 };
 
-const newConnection = name => {
+const addConnectionToGroup = (connectionId, groupId) => {
+  const group = findGroup(groupId);
+  if (!group) {
+    console.error(`No group found with ID: ${groupId}`);
+    return;
+  }
+
+  const updated = read().groups.map(group => {
+    if (group.id !== groupId) {
+      return group;
+    }
+
+    return {
+      ...group,
+      connections: [...group.connections, connectionId],
+    };
+  });
+
+  write({ groups: updated });
+};
+
+const createDefaultGroup = connectionId => {
+  const defaultGroup = findDefaultGroup();
+  const defaultGroupId = defaultGroup ? defaultGroup.id : newGroup('My Connections', true);
+  addConnectionToGroup(connectionId, defaultGroupId);
+};
+
+const findDefaultGroup = () => read().groups.find(group => group.isDefault);
+const findGroup = groupId => read().groups.find(group => group.id === groupId);
+
+const newConnection = (name, groupId = 0) => {
   const data = read();
-  const nextConnectionId = data.connectionId + 1;
+  const nextId = data.connectionId + 1;
+
+  createDefaultGroup(nextId);
+
   write({
-    connectionId: nextConnectionId,
+    connectionId: nextId,
     connections: [
       ...data.connections,
       {
-        id: data.connectionId + 1,
+        id: nextId,
         name,
         ping: {
           year: data.currentYear,
@@ -42,7 +75,34 @@ const newConnection = name => {
   });
 };
 
+const newGroup = (name, isDefault = false) => {
+  const data = read();
+  const nextId = data.groupId + 1;
+  write({
+    groupId: nextId,
+    groups: [
+      ...data.groups,
+      {
+        id: nextId,
+        name,
+        connections: [],
+        isDefault,
+      },
+    ],
+  });
+
+  return nextId;
+};
+
+const nukeEverything = () => {
+  localStorage.setItem(rootKey, JSON.stringify({}));
+  initialize();
+};
+
 export const IO = {
   initialize,
   newConnection,
+  newGroup,
+  nukeEverything,
+  read,
 };

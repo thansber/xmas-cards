@@ -1,11 +1,8 @@
 import { LitElement, html, css } from 'lit-element';
 
-import { connectionCss } from '../css/connection.css';
-
 class ConnectionsElement extends LitElement {
   static get styles() {
     return [
-      connectionCss,
       css`
         :host {
           display: block;
@@ -15,6 +12,12 @@ class ConnectionsElement extends LitElement {
           display: flex;
           font-size: 175%;
           margin-bottom: 1rem;
+        }
+
+        section {
+          align-items: flex-start;
+          display: flex;
+          justify-content: space-between;
         }
       `,
     ];
@@ -31,7 +34,10 @@ class ConnectionsElement extends LitElement {
       ${this.connections.map(
         conn =>
           html`
-            <xmas-connection .connection="${conn}"></xmas-connection>
+            <section>
+              <xmas-connection .connection="${conn}"></xmas-connection>
+              <xmas-connection-actions .connection="${conn}"></xmas-connection-actions>
+            </section>
           `,
       )}
     `;

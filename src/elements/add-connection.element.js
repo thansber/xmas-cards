@@ -87,7 +87,7 @@ class AddConnection extends LitElement {
           <span>Add someone you connect with during the Christmas season</span>
           <input id="${this.nameId}" placeholder="Enter a name" />
         </label>
-        <button>Add</button>
+        <button class="primary">Add</button>
       </form>
     `;
   }

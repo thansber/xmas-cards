@@ -15,7 +15,7 @@ class XmasCards extends LitElement {
     return [
       css`
         :host {
-          background-color: rgb(0, 32, 0);
+          background-color: var(--xmas-green-dark);
           bottom: 0;
           color: white;
           left: 0;
@@ -44,6 +44,14 @@ class XmasCards extends LitElement {
     this.data = IO.read();
   }
 
+  onDeleteConnection(e) {
+    debugger;
+  }
+
+  onRenameConnection(e) {
+    debugger;
+  }
+
   onTogglePing(e) {
     IO.togglePing(e.detail);
     this.data = IO.read();
@@ -53,7 +61,12 @@ class XmasCards extends LitElement {
     return html`
       <xmas-add-connection @addConnection="${this.onAddConnection}"></xmas-add-connection>
 
-      <xmas-groups .groups="${this.data.groups}" @togglePing="${this.onTogglePing}"></xmas-groups>
+      <xmas-groups
+        .groups="${this.data.groups}"
+        @deleteConnection="${this.onDeleteConnection}"
+        @renameConnection="${this.onRenameConnection}"
+        @togglePing="${this.onTogglePing}"
+      ></xmas-groups>
 
       ${this.renderTesting()}
     `;

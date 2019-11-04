@@ -1,7 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
 
-import { IO } from '../io';
-
 class ConnectionElement extends LitElement {
   static get styles() {
     return [

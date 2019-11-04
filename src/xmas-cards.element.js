@@ -8,6 +8,7 @@ class XmasCards extends LitElement {
     super();
     IO.initialize();
     this.data = IO.read();
+    this.testing = /testing/.test(window.location.search);
   }
 
   static get styles() {
@@ -43,14 +44,27 @@ class XmasCards extends LitElement {
     this.data = IO.read();
   }
 
+  onTogglePing(e) {
+    IO.togglePing(e.detail);
+    this.data = IO.read();
+  }
+
   render() {
     return html`
       <xmas-add-connection @addConnection="${this.onAddConnection}"></xmas-add-connection>
 
-      <xmas-groups .groups="${this.data.groups}"></xmas-groups>
+      <xmas-groups .groups="${this.data.groups}" @togglePing="${this.onTogglePing}"></xmas-groups>
 
-      <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
+      ${this.renderTesting()}
     `;
+  }
+
+  renderTesting() {
+    if (this.testing) {
+      return html`
+        <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
+      `;
+    }
   }
 }
 

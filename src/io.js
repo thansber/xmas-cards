@@ -69,9 +69,11 @@ const newConnection = (name, groupId = 0) => {
       {
         id: nextId,
         name,
-        ping: {
-          year: data.currentYear,
-        },
+        pings: [
+          {
+            year: data.currentYear,
+          },
+        ],
       },
     ],
   });
@@ -101,6 +103,32 @@ const nukeEverything = () => {
   initialize();
 };
 
+const togglePing = detail => {
+  const connection = findConnection(detail.connectionId);
+  const errorMsg = msg =>
+    `While updating [${detail.property}] for year [${detail.year}] and connection [${detail.connectionId}], ${msg}`;
+
+  if (!connection) {
+    throw new Error(errorMsg(`unable to find connection`));
+  }
+
+  const ping = connection.pings.find(p => p.year === detail.year);
+  if (!ping) {
+    throw new Error(errorMsg(`unable to find ping year`));
+  }
+
+  ping[detail.property] = !ping[detail.property];
+  updateConnection(connection);
+};
+
+const updateConnection = updated => {
+  const connections = read().connections;
+  const index = connections.findIndex(connection => connection.id === updated.id);
+  write({
+    connections: [...connections.slice(0, index), updated, ...connections.slice(index + 1)],
+  });
+};
+
 export const IO = {
   findConnection,
   initialize,
@@ -108,4 +136,5 @@ export const IO = {
   newGroup,
   nukeEverything,
   read,
+  togglePing,
 };

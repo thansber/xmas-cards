@@ -56,11 +56,12 @@ class XmasCards extends LitElement {
   }
 
   onDeleteConnection(e) {
-    debugger;
+    IO.deleteConnection(e.detail.id);
+    this.data = IO.read();
   }
 
   onRenameConnection(e) {
-    debugger;
+    this.data = IO.read();
   }
 
   onTogglePing(e) {

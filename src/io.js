@@ -57,8 +57,24 @@ const createDefaultGroup = connectionId => {
   addConnectionToGroup(connectionId, defaultGroupId);
 };
 
+const deleteConnection = connectionId => {
+  const data = read();
+  const index = findConnectionIndex(connectionId);
+  write({
+    connections: [...data.connections.slice(0, index), ...data.connections.slice(index + 1)],
+    groups: data.groups.map(group => ({
+      ...group,
+      connections: group.connections.filter(
+        groupConnectionId => groupConnectionId !== connectionId,
+      ),
+    })),
+  });
+};
+
 const findConnection = connectionId =>
   read().connections.find(connection => connection.id === connectionId);
+const findConnectionIndex = connectionId =>
+  read().connections.findIndex(connection => connection.id === connectionId);
 const findDefaultGroup = () => read().groups.find(group => group.isDefault);
 const findGroup = groupId => read().groups.find(group => group.id === groupId);
 
@@ -129,7 +145,7 @@ const togglePing = detail => {
 
 const updateConnection = updated => {
   const connections = read().connections;
-  const index = connections.findIndex(connection => connection.id === updated.id);
+  const index = findConnectionIndex(updated.id);
   write({
     connections: [...connections.slice(0, index), updated, ...connections.slice(index + 1)],
   });
@@ -137,6 +153,7 @@ const updateConnection = updated => {
 
 export const IO = {
   autoPopulate,
+  deleteConnection,
   findConnection,
   initialize,
   newConnection,

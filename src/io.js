@@ -45,6 +45,12 @@ const addConnectionToGroup = (connectionId, groupId) => {
   write({ groups: updated });
 };
 
+const autoPopulate = () => {
+  newConnection('Parents');
+  newConnection('Aunt Lisa');
+  newConnection('In-Laws');
+};
+
 const createDefaultGroup = connectionId => {
   const defaultGroup = findDefaultGroup();
   const defaultGroupId = defaultGroup ? defaultGroup.id : newGroup('My Connections', true);
@@ -130,6 +136,7 @@ const updateConnection = updated => {
 };
 
 export const IO = {
+  autoPopulate,
   findConnection,
   initialize,
   newConnection,

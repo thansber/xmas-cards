@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
 import { buttonCss } from '../css/button.css';
+import { icons } from './icons';
 
 class ConnectionActionsElement extends LitElement {
   static get styles() {
@@ -14,6 +15,10 @@ class ConnectionActionsElement extends LitElement {
 
         p {
           margin: 0;
+        }
+
+        #trigger {
+          display: flex;
         }
 
         #actions {
@@ -71,7 +76,7 @@ class ConnectionActionsElement extends LitElement {
 
   render() {
     return html`
-      <button id="trigger" @click="${this.toggleActions}">More</button>
+      <button id="trigger" @click="${this.toggleActions}">${icons.more}</button>
       <ul id="actions" class="${this.actionClasses()}" @click="${this.fireAction}">
         <li action="renameConnection">Rename</li>
         <li action="deleteConnection">Delete</li>

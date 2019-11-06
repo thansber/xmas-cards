@@ -24,6 +24,12 @@ class XmasCards extends LitElement {
           right: 0;
           top: 0;
         }
+
+        footer {
+          bottom: 1rem;
+          position: absolute;
+          right: 1rem;
+        }
       `,
     ];
   }
@@ -36,6 +42,11 @@ class XmasCards extends LitElement {
 
   onAddConnection(e) {
     IO.newConnection(e.detail.name);
+    this.data = IO.read();
+  }
+
+  onAutoPopulate() {
+    IO.autoPopulate();
     this.data = IO.read();
   }
 
@@ -75,7 +86,10 @@ class XmasCards extends LitElement {
   renderTesting() {
     if (this.testing) {
       return html`
-        <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
+        <footer>
+          <xmas-auto-populate @autoPopulate="${this.onAutoPopulate}"></xmas-auto-populate>
+          <xmas-clear-all @clearAll="${this.onClearAll}"></xmas-clear-all>
+        </footer>
       `;
     }
   }

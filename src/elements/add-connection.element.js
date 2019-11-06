@@ -3,7 +3,7 @@ import { classMap } from 'lit-html/directives/class-map';
 
 import { buttonCss } from '../css/button.css';
 
-class AddConnection extends LitElement {
+class AddConnectionElement extends LitElement {
   constructor() {
     super();
     this.nameId = 'name';
@@ -93,4 +93,4 @@ class AddConnection extends LitElement {
   }
 }
 
-customElements.define('xmas-add-connection', AddConnection);
+customElements.define('xmas-add-connection', AddConnectionElement);

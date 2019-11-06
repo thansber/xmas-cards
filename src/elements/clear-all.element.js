@@ -4,16 +4,7 @@ import { buttonCss } from '../css/button.css';
 
 class ClearAllElement extends LitElement {
   static get styles() {
-    return [
-      buttonCss,
-      css`
-        :host {
-          position: absolute;
-          bottom: 1rem;
-          right: 1rem;
-        }
-      `,
-    ];
+    return [buttonCss];
   }
 
   static get properties() {
@@ -26,7 +17,7 @@ class ClearAllElement extends LitElement {
 
   render() {
     return html`
-      <button @click="${this.clearAll}">Clear All Data</button>
+      <button @click="${this.clearAll}">Clear All</button>
     `;
   }
 }

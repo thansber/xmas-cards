@@ -9,6 +9,11 @@ class GroupsElement extends LitElement {
           margin-top: 2.5rem;
           width: 75%;
         }
+
+        #empty {
+          font-size: 125%;
+          text-align: center;
+        }
       `,
     ];
   }
@@ -21,6 +26,14 @@ class GroupsElement extends LitElement {
   }
 
   render() {
+    if (!this.groups.length) {
+      return html`
+        <section id="empty">
+          Your groups and connections will appear here once you have added one using the input box
+          above and clicking the Add button
+        </section>
+      `;
+    }
     return html`
       ${this.groups.map(
         group =>

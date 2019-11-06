@@ -6,7 +6,6 @@ class ConnectionElement extends LitElement {
       css`
         :host {
           display: block;
-          margin-bottom: 1rem;
         }
 
         .name {

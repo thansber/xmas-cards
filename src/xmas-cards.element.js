@@ -7,7 +7,9 @@ class XmasCards extends LitElement {
   constructor() {
     super();
     IO.initialize();
+
     this.data = IO.read();
+    this.renamingConnectionId = -1;
     this.testing = /testing/.test(window.location.search);
   }
 
@@ -37,6 +39,7 @@ class XmasCards extends LitElement {
   static get properties() {
     return {
       data: { type: Object },
+      renamingConnectionId: { type: Number },
     };
   }
 
@@ -60,8 +63,18 @@ class XmasCards extends LitElement {
     this.data = IO.read();
   }
 
+  onRenameCancel() {
+    this.renamingConnectionId = -1;
+  }
+
   onRenameConnection(e) {
+    this.renamingConnectionId = e.detail.id;
+  }
+
+  onRenameSave(e) {
+    IO.renameConnection(this.renamingConnectionId, e.detail.name);
     this.data = IO.read();
+    this.onRenameCancel();
   }
 
   onTogglePing(e) {
@@ -75,8 +88,11 @@ class XmasCards extends LitElement {
 
       <xmas-groups
         .groups="${this.data.groups}"
+        .renamingConnectionId="${this.renamingConnectionId}"
         @deleteConnection="${this.onDeleteConnection}"
+        @renameCancel="${this.onRenameCancel}"
         @renameConnection="${this.onRenameConnection}"
+        @renameSave="${this.onRenameSave}"
         @togglePing="${this.onTogglePing}"
       ></xmas-groups>
 

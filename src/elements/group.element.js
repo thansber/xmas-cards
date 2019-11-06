@@ -30,6 +30,7 @@ class GroupElement extends LitElement {
   static get properties() {
     return {
       group: { type: Object },
+      renamingConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -37,7 +38,11 @@ class GroupElement extends LitElement {
     const connections = this.group.connections.map(connectionId => IO.findConnection(connectionId));
     return html`
       <h2 data-groupId="${this.group.id}">${this.group.name}</h2>
-      <xmas-connections .connections="${connections}" id="connections"></xmas-connections>
+      <xmas-connections
+        id="connections"
+        .connections="${connections}"
+        .renamingConnectionId="${this.renamingConnectionId}"
+      ></xmas-connections>
     `;
   }
 }

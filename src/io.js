@@ -125,6 +125,20 @@ const nukeEverything = () => {
   initialize();
 };
 
+const renameConnection = (connectionId, newName) => {
+  const connection = findConnection(connectionId);
+  if (!connection) {
+    throw new Error(
+      `While renaming connection [${connectionId}] to [${newName}], unable to find connection`,
+    );
+  }
+
+  updateConnection({
+    ...connection,
+    name: newName,
+  });
+};
+
 const togglePing = detail => {
   const connection = findConnection(detail.connectionId);
   const errorMsg = msg =>
@@ -160,5 +174,6 @@ export const IO = {
   newGroup,
   nukeEverything,
   read,
+  renameConnection,
   togglePing,
 };

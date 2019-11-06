@@ -76,10 +76,16 @@ class ConnectionActionsElement extends LitElement {
 
   render() {
     return html`
-      <button id="trigger" @click="${this.toggleActions}">${icons.more}</button>
+      <button
+        id="trigger"
+        @click="${this.toggleActions}"
+        title="More actions for ${this.connection.name} (Click again to close)"
+      >
+        ${icons.more}
+      </button>
       <ul id="actions" class="${this.actionClasses()}" @click="${this.fireAction}">
-        <li action="renameConnection">Rename</li>
-        <li action="deleteConnection">Delete</li>
+        <li action="renameConnection" title="Rename ${this.connection.name}">Rename</li>
+        <li action="deleteConnection" title="Delete ${this.connection.name}">Delete</li>
       </ul>
     `;
   }

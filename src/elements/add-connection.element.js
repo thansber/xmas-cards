@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
 import { buttonCss } from '../css/button.css';
+import { inputCss } from '../css/input.css';
 import { icons } from './icons';
 
 class AddConnectionElement extends LitElement {
@@ -13,6 +14,7 @@ class AddConnectionElement extends LitElement {
   static get styles() {
     return [
       buttonCss,
+      inputCss,
       css`
         :host {
         }
@@ -31,19 +33,6 @@ class AddConnectionElement extends LitElement {
 
         span {
           display: block;
-        }
-
-        .name-error input {
-          background-color: rgb(239, 202, 113);
-        }
-
-        .name-error:after {
-          bottom: 0;
-          content: '!';
-          color: red;
-          font-size: 150%;
-          position: absolute;
-          right: 1.5rem;
         }
 
         #add {
@@ -82,18 +71,20 @@ class AddConnectionElement extends LitElement {
 
   inputClasses() {
     return classMap({
-      'name-error': this.nameError,
+      'has-error': this.nameError,
     });
   }
 
   render() {
     return html`
       <form @submit="${this.addConnection}">
-        <label class="${this.inputClasses()}">
+        <label class="${this.inputClasses()}" for="${this.nameId}">
           <span>Add someone you connect with during the Christmas season</span>
           <input id="${this.nameId}" placeholder="Enter a name" />
         </label>
-        <button id="add" class="primary">Add ${icons.plus}</button>
+        <button id="add" class="primary large" title="Add a new connection">
+          Add ${icons.plus}
+        </button>
       </form>
     `;
   }

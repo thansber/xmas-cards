@@ -15,6 +15,9 @@ export const buttonCss = css`
 
   button.primary {
     background-color: var(--xmas-red);
+  }
+
+  button.large {
     font-size: 150%;
     padding: 0.45rem 1rem;
   }

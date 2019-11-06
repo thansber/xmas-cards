@@ -16,6 +16,7 @@ class GroupsElement extends LitElement {
   static get properties() {
     return {
       groups: { type: Array },
+      renamingConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -24,7 +25,10 @@ class GroupsElement extends LitElement {
       ${this.groups.map(
         group =>
           html`
-            <xmas-group .group="${group}"></xmas-group>
+            <xmas-group
+              .group="${group}"
+              .renamingConnectionId="${this.renamingConnectionId}"
+            ></xmas-group>
           `,
       )}
     `;

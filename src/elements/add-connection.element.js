@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
 import { buttonCss } from '../css/button.css';
+import { icons } from './icons';
 
 class AddConnectionElement extends LitElement {
   constructor() {
@@ -43,6 +44,11 @@ class AddConnectionElement extends LitElement {
           font-size: 150%;
           position: absolute;
           right: 1.5rem;
+        }
+
+        #add {
+          align-items: center;
+          display: inline-flex;
         }
       `,
     ];
@@ -87,7 +93,7 @@ class AddConnectionElement extends LitElement {
           <span>Add someone you connect with during the Christmas season</span>
           <input id="${this.nameId}" placeholder="Enter a name" />
         </label>
-        <button class="primary">Add</button>
+        <button id="add" class="primary">Add ${icons.plus}</button>
       </form>
     `;
   }

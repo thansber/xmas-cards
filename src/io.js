@@ -3,7 +3,7 @@ const props = [
   { name: 'connectionId', initialValue: 0 },
   { name: 'connections', initialValue: [] },
   // eslint-disable-next-line no-undef
-  { name: 'currentYear', initialValue: dayjs().year() },
+  { name: 'currentYear', initialValue: new Date().getFullYear() },
   { name: 'groupId', initialValue: 0 },
   { name: 'groups', initialValue: [] },
 ];

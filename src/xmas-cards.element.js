@@ -17,7 +17,6 @@ class XmasCards extends LitElement {
     return [
       css`
         :host {
-          background-color: var(--xmas-green-dark);
           bottom: 0;
           color: white;
           left: 0;

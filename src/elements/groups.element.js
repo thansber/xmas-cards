@@ -6,6 +6,7 @@ class GroupsElement extends LitElement {
       css`
         :host {
           display: block;
+          margin-bottom: 2.5rem;
           margin-top: 2.5rem;
           width: 75%;
         }

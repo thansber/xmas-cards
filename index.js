@@ -1,1 +1,0 @@
-import './xmas-cards.element';

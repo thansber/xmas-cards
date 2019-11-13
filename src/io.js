@@ -6,6 +6,7 @@ const props = [
   { name: 'currentYear', initialValue: new Date().getFullYear() },
   { name: 'groupId', initialValue: 0 },
   { name: 'groups', initialValue: [] },
+  { name: 'numTrackingYears', initialValue: 3 },
 ];
 
 const read = () => JSON.parse(localStorage.getItem(rootKey) || '{}');

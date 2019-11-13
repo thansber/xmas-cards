@@ -11,6 +11,7 @@ class XmasCards extends LitElement {
 
     this.data = IO.read();
     this.renamingConnectionId = -1;
+    this.settingsShown = true;
     this.testing = /testing/.test(window.location.search);
   }
 
@@ -80,6 +81,9 @@ class XmasCards extends LitElement {
 
   onSettings(e) {
     this.settingsShown = e.detail;
+    if (e.detail) {
+      this.shadowRoot.getElementById('settings').applyFocus();
+    }
   }
 
   onTogglePing(e) {
@@ -107,6 +111,7 @@ class XmasCards extends LitElement {
       <xmas-settings
         id="settings"
         class="${this.settingsClasses()}"
+        .numYears="${this.data.numTrackingYears}"
         @settings="${this.onSettings}"
       ></xmas-settings>
 

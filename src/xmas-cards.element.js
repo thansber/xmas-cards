@@ -76,6 +76,10 @@ class XmasCards extends LitElement {
     this.onRenameCancel();
   }
 
+  onSettings(e) {
+    console.log(e.detail);
+  }
+
   onTogglePing(e) {
     IO.togglePing(e.detail);
     this.data = IO.read();
@@ -83,7 +87,10 @@ class XmasCards extends LitElement {
 
   render() {
     return html`
-      <xmas-add-connection @addConnection="${this.onAddConnection}"></xmas-add-connection>
+      <xmas-header
+        @addConnection="${this.onAddConnection}"
+        @settings="${this.onSettings}"
+      ></xmas-header>
 
       <xmas-groups
         .groups="${this.data.groups}"

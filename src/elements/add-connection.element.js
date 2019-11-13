@@ -58,7 +58,9 @@ class AddConnectionElement extends LitElement {
       this.nameError = true;
       this.nameInput.focus();
     } else {
-      this.dispatchEvent(new CustomEvent('addConnection', { detail: { name } }));
+      this.dispatchEvent(
+        new CustomEvent('addConnection', { bubbles: true, composed: true, detail: { name } }),
+      );
       this.nameInput.focus();
       this.nameInput.select();
     }

@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
+import { classMap } from 'lit-html/directives/class-map';
 
 import { IO } from './io.js';
 import './elements/index.js';
@@ -39,6 +40,7 @@ class XmasCards extends LitElement {
     return {
       data: { type: Object },
       renamingConnectionId: { type: Number },
+      settingsShown: { type: Boolean },
     };
   }
 
@@ -77,7 +79,7 @@ class XmasCards extends LitElement {
   }
 
   onSettings(e) {
-    console.log(e.detail);
+    this.settingsShown = e.detail;
   }
 
   onTogglePing(e) {
@@ -102,6 +104,12 @@ class XmasCards extends LitElement {
         @togglePing="${this.onTogglePing}"
       ></xmas-groups>
 
+      <xmas-settings
+        id="settings"
+        class="${this.settingsClasses()}"
+        @settings="${this.onSettings}"
+      ></xmas-settings>
+
       ${this.renderTesting()}
     `;
   }
@@ -115,6 +123,12 @@ class XmasCards extends LitElement {
         </footer>
       `;
     }
+  }
+
+  settingsClasses() {
+    return classMap({
+      shown: this.settingsShown,
+    });
   }
 }
 

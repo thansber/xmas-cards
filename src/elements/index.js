@@ -1,11 +1,12 @@
-import './add-connection.element.js';
-import './connection.element.js';
-import './connection-actions.element.js';
-import './connections.element.js';
-import './group.element.js';
-import './groups.element.js';
+import './add-connection.element';
+import './connection.element';
+import './connection-actions.element';
+import './connections.element';
+import './group.element';
+import './groups.element';
 import './header.element';
+import './settings.element';
 
 // Testing elements
-import './auto-populate.element.js';
-import './clear-all.element.js';
+import './auto-populate.element';
+import './clear-all.element';

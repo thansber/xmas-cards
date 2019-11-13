@@ -40,13 +40,14 @@ class ConnectionElement extends LitElement {
   static get properties() {
     return {
       connection: { type: Object },
+      numYears: { type: Number },
     };
   }
 
   render() {
     return html`
       <div class="name">${this.connection.name}</div>
-      ${this.connection.pings.map(
+      ${this.connection.pings.slice(0, this.numYears).map(
         ping => html`
           <section class="year">
             <p>${ping.year}</p>

@@ -3,6 +3,13 @@ import { LitElement, html, css } from 'lit-element';
 import { buttonCss } from '../css/button.css';
 
 class SettingsElement extends LitElement {
+  constructor() {
+    super();
+
+    this.saveMessage = null;
+    this.yearInput = null;
+  }
+
   static get styles() {
     return [
       buttonCss,
@@ -48,7 +55,7 @@ class SettingsElement extends LitElement {
         }
 
         #close {
-          margin: 0.5rem;
+          margin: 1rem;
         }
 
         section {
@@ -58,6 +65,27 @@ class SettingsElement extends LitElement {
         #years input {
           font-size: 125%;
           padding: 0.25rem;
+        }
+
+        footer {
+          align-items: center;
+          display: flex;
+          margin-top: 3rem;
+        }
+
+        .primary {
+          font-size: 150%;
+        }
+
+        #saveMessage {
+          font-weight: normal;
+          margin-left: 2rem;
+          opacity: 0;
+          transition: opacity 0.5s;
+        }
+
+        #saveMessage.show {
+          opacity: 1;
         }
       `,
     ];
@@ -71,11 +99,12 @@ class SettingsElement extends LitElement {
 
   async applyFocus() {
     await this.updateComplete;
-    this.shadowRoot.getElementById('yearInput').focus();
+    this.yearInput.focus();
   }
 
   hideSettings() {
     this.dispatchEvent(new CustomEvent('settings', { detail: false }));
+    this.resetSettings();
   }
 
   render() {
@@ -93,8 +122,34 @@ class SettingsElement extends LitElement {
             <input id="yearInput" type="number" min="1" max="5" value="${this.numYears}" />
           </label>
         </section>
+
+        <footer>
+          <button class="primary" @click="${this.saveSettings}">Save</button>
+          <b id="saveMessage">Settings Saved</b>
+        </footer>
       </main>
     `;
+  }
+
+  resetSettings() {
+    this.yearInput.value = this.numYears;
+  }
+
+  saveSettings() {
+    this.dispatchEvent(
+      new CustomEvent('saveSettings', {
+        detail: {
+          numTrackingYears: this.yearInput.value,
+        },
+      }),
+    );
+    this.saveMessage.classList.add('show');
+    setTimeout(() => this.saveMessage.classList.remove('show'), 2500);
+  }
+
+  updated() {
+    this.saveMessage = this.shadowRoot.getElementById('saveMessage');
+    this.yearInput = this.shadowRoot.getElementById('yearInput');
   }
 }
 

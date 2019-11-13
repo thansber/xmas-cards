@@ -23,9 +23,9 @@ class ConnectionsElement extends LitElement {
         section {
           align-items: center;
           display: flex;
-          height: 3rem;
           justify-content: space-between;
           margin-bottom: 1rem;
+          min-height: 3rem;
           position: relative;
         }
 
@@ -50,6 +50,7 @@ class ConnectionsElement extends LitElement {
     return {
       connections: { type: Array },
       nameError: { type: Boolean },
+      numYears: { type: Number },
       renamingConnectionId: { type: Number, attribute: false },
     };
   }
@@ -111,7 +112,7 @@ class ConnectionsElement extends LitElement {
   renderViewMode(connection) {
     return html`
       <section id="view">
-        <xmas-connection .connection="${connection}"></xmas-connection>
+        <xmas-connection .connection="${connection}" .numYears="${this.numYears}"></xmas-connection>
         <xmas-connection-actions .connection="${connection}"></xmas-connection-actions>
       </section>
     `;

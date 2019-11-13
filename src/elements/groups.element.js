@@ -23,6 +23,7 @@ class GroupsElement extends LitElement {
     return {
       groups: { type: Array },
       renamingConnectionId: { type: Number, attribute: false },
+      numYears: { type: Number },
     };
   }
 
@@ -42,6 +43,7 @@ class GroupsElement extends LitElement {
             <xmas-group
               .group="${group}"
               .renamingConnectionId="${this.renamingConnectionId}"
+              .numYears="${this.numYears}"
             ></xmas-group>
           `,
       )}

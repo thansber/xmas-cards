@@ -92,11 +92,9 @@ const newConnection = (name, groupId = 0) => {
       {
         id: nextId,
         name,
-        pings: [
-          {
-            year: data.currentYear,
-          },
-        ],
+        pings: Array.from(Array(data.numTrackingYears)).map((_, i) => ({
+          year: data.currentYear - i,
+        })),
       },
     ],
   });
@@ -166,6 +164,8 @@ const updateConnection = updated => {
   });
 };
 
+const updateSettings = changes => write(changes);
+
 export const IO = {
   autoPopulate,
   deleteConnection,
@@ -177,4 +177,5 @@ export const IO = {
   read,
   renameConnection,
   togglePing,
+  updateSettings,
 };

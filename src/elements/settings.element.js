@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 
 import { buttonCss } from '../css/button.css';
+import { icons } from './icons';
 
 class SettingsElement extends LitElement {
   constructor() {
@@ -116,7 +117,9 @@ class SettingsElement extends LitElement {
       <main>
         <header>
           <h1>Settings</h1>
-          <button id="close" title="Close Settings" @click="${this.hideSettings}">Close</button>
+          <button id="close" title="Close Settings" @click="${this.hideSettings}">
+            ${icons.close}
+          </button>
         </header>
 
         <section id="years">

@@ -79,13 +79,6 @@ class XmasCards extends LitElement {
     this.onRenameCancel();
   }
 
-  onSettings(e) {
-    this.settingsShown = e.detail;
-    if (e.detail) {
-      this.shadowRoot.getElementById('settings').applyFocus();
-    }
-  }
-
   onSaveSettings(e) {
     IO.updateSettings(e.detail);
     this.data = IO.read();
@@ -96,11 +89,18 @@ class XmasCards extends LitElement {
     this.data = IO.read();
   }
 
+  onToggleSettings(e) {
+    this.settingsShown = e.detail;
+    if (e.detail) {
+      this.shadowRoot.getElementById('settings').applyFocus();
+    }
+  }
+
   render() {
     return html`
       <xmas-header
         @addConnection="${this.onAddConnection}"
-        @settings="${this.onSettings}"
+        @toggleSettings="${this.onToggleSettings}"
       ></xmas-header>
 
       <xmas-groups
@@ -118,7 +118,7 @@ class XmasCards extends LitElement {
         id="settings"
         class="${this.settingsClasses()}"
         .numYears="${this.data.numTrackingYears}"
-        @settings="${this.onSettings}"
+        @toggleSettings="${this.onToggleSettings}"
         @saveSettings="${this.onSaveSettings}"
       ></xmas-settings>
 

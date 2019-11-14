@@ -6,6 +6,9 @@ class SettingsElement extends LitElement {
   constructor() {
     super();
 
+    this.minYears = 1;
+    this.maxYears = 5;
+
     this.saveMessage = null;
     this.yearInput = null;
   }
@@ -103,7 +106,7 @@ class SettingsElement extends LitElement {
   }
 
   hideSettings() {
-    this.dispatchEvent(new CustomEvent('settings', { detail: false }));
+    this.dispatchEvent(new CustomEvent('toggleSettings', { detail: false }));
     this.resetSettings();
   }
 
@@ -119,7 +122,13 @@ class SettingsElement extends LitElement {
         <section id="years">
           <label>
             How many years do you want to track?
-            <input id="yearInput" type="number" min="1" max="5" value="${this.numYears}" />
+            <input
+              id="yearInput"
+              type="number"
+              min="${this.minYears}"
+              max="${this.maxYears}"
+              value="${this.numYears}"
+            />
           </label>
         </section>
 
@@ -136,6 +145,14 @@ class SettingsElement extends LitElement {
   }
 
   saveSettings() {
+    if (this.yearInput.value < this.minYears) {
+      this.yearInput.value = this.minYears;
+    }
+
+    if (this.yearInput.value > this.maxYears) {
+      this.yearInput.value = this.maxYears;
+    }
+
     this.dispatchEvent(
       new CustomEvent('saveSettings', {
         detail: {

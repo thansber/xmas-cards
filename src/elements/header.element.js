@@ -34,7 +34,7 @@ class HeaderElement extends LitElement {
   }
 
   showSettings() {
-    this.dispatchEvent(new CustomEvent('settings', { detail: true }));
+    this.dispatchEvent(new CustomEvent('toggleSettings', { detail: true }));
   }
 }
 

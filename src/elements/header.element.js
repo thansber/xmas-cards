@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 
 import { buttonCss } from '../css/button.css';
+import { icons } from './icons';
 
 class HeaderElement extends LitElement {
   static get styles() {
@@ -8,7 +9,7 @@ class HeaderElement extends LitElement {
       buttonCss,
       css`
         :host {
-          align-items: center;
+          align-items: flex-start;
           display: flex;
           justify-content: space-between;
           width: 100%;
@@ -28,7 +29,7 @@ class HeaderElement extends LitElement {
   render() {
     return html`
       <xmas-add-connection id="add"></xmas-add-connection>
-      <button @click="${this.showSettings}">Settings</button>
+      <button title="Open Settings" @click="${this.showSettings}">${icons.settings}</button>
     `;
   }
 

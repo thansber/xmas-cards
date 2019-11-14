@@ -13,7 +13,6 @@ class GroupsElement extends LitElement {
 
         #empty {
           font-size: 125%;
-          text-align: center;
         }
       `,
     ];
@@ -31,8 +30,11 @@ class GroupsElement extends LitElement {
     if (!this.groups.length) {
       return html`
         <section id="empty">
-          Your groups and connections will appear here once you have added one using the input box
-          above and clicking the Add button
+          <p>
+            Your groups and connections will appear here once you have added one using the input box
+            above and clicking the Add button.
+          </p>
+          <p>Changes are saved automatically.</p>
         </section>
       `;
     }

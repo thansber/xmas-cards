@@ -6,7 +6,7 @@ const props = [
   { name: 'currentYear', initialValue: new Date().getFullYear() },
   { name: 'groupId', initialValue: 0 },
   { name: 'groups', initialValue: [] },
-  { name: 'numTrackingYears', initialValue: 3 },
+  { name: 'numTrackingYears', initialValue: 1 },
 ];
 
 const read = () => JSON.parse(localStorage.getItem(rootKey) || '{}');
@@ -70,6 +70,15 @@ const deleteConnection = connectionId => {
       ),
     })),
   });
+};
+
+const fillInPings = (connection, numYears) => {
+  const oldestPing = connection.pings[connection.pings.length - 1];
+  const fillerPings = Array.from(Array(numYears - connection.pings.length)).map((_, i) => ({
+    year: oldestPing.year - (i + 1),
+  }));
+  connection.pings = [...connection.pings, ...fillerPings];
+  updateConnection(connection);
 };
 
 const findConnection = connectionId =>
@@ -164,7 +173,16 @@ const updateConnection = updated => {
   });
 };
 
-const updateSettings = changes => write(changes);
+const updateSettings = changes => {
+  const data = read();
+  const newYears = +changes.numTrackingYears;
+  if (newYears && newYears > +data.numTrackingYears) {
+    data.connections
+      .filter(connection => connection.pings.length < newYears)
+      .forEach(connection => fillInPings(connection, newYears));
+  }
+  write(changes);
+};
 
 export const IO = {
   autoPopulate,

@@ -36,7 +36,9 @@ class GroupElement extends LitElement {
   }
 
   render() {
-    const connections = this.group.connections.map(connectionId => IO.findConnection(connectionId));
+    const connections = this.group.connections
+      .map(connectionId => IO.findConnection(connectionId))
+      .sort(this.sortByName);
     return html`
       <h2 data-groupId="${this.group.id}">${this.group.name}</h2>
       <xmas-connections
@@ -46,6 +48,10 @@ class GroupElement extends LitElement {
         .numYears="${this.numYears}"
       ></xmas-connections>
     `;
+  }
+
+  sortByName(connA, connB) {
+    return connA.name.localeCompare(connB.name, undefined, { sensitivity: 'base' });
   }
 }
 

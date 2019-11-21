@@ -8,7 +8,8 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "start": "es-dev-server --app-index src/index.html --node-resolve --watch --open",
     "start:build": "npm run build; cd dist && es-dev-server --open",
-    "build": "rimraf dist && rollup -c rollup.config.js"
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "deploy": "npm run build && firebase deploy"
   },
   "devDependencies": {
     "@open-wc/building-rollup": "^0.9.0",

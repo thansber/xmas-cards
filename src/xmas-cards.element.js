@@ -103,6 +103,11 @@ class XmasCards extends LitElement {
         @toggleSettings="${this.onToggleSettings}"
       ></xmas-header>
 
+      <xmas-summary
+        .connections="${this.data.connections}"
+        .year="${this.data.currentYear}"
+      ></xmas-summary>
+
       <xmas-groups
         .groups="${this.data.groups}"
         .renamingConnectionId="${this.renamingConnectionId}"

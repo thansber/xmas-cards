@@ -6,6 +6,7 @@ import './group.element';
 import './groups.element';
 import './header.element';
 import './settings.element';
+import './summary.element';
 
 // Testing elements
 import './auto-populate.element';

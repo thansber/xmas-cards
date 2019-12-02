@@ -33,6 +33,23 @@ class ConnectionElement extends LitElement {
           margin: 0 0.25rem 0 0;
           width: 1rem;
         }
+
+        .print {
+          display: none;
+          font-weight: normal;
+          margin-left: 1rem;
+        }
+      `,
+      css`
+        @media print {
+          label {
+            display: none;
+          }
+
+          .print {
+            display: inline-block;
+          }
+        }
       `,
     ];
   }
@@ -42,6 +59,17 @@ class ConnectionElement extends LitElement {
       connection: { type: Object },
       numYears: { type: Number },
     };
+  }
+
+  printPing(ping) {
+    const out = [];
+    if (ping.sent) {
+      out.push('Sent');
+    }
+    if (ping.received) {
+      out.push('Received');
+    }
+    return out.join(' & ');
   }
 
   render() {
@@ -65,6 +93,7 @@ class ConnectionElement extends LitElement {
                 @change="${_ => this.togglePing(ping.year, 'received')}"
               />Received</label
             >
+            <b class="print">${this.printPing(ping)}</b>
           </section>
         `,
       )}

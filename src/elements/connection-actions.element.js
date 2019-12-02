@@ -46,6 +46,13 @@ class ConnectionActionsElement extends LitElement {
           border-color: white;
         }
       `,
+      css`
+        @media print {
+          :host {
+            display: none;
+          }
+        }
+      `,
     ];
   }
 

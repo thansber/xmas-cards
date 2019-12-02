@@ -15,6 +15,13 @@ class GroupsElement extends LitElement {
           font-size: 125%;
         }
       `,
+      css`
+        @media print {
+          :host {
+            width: 100%;
+          }
+        }
+      `,
     ];
   }
 

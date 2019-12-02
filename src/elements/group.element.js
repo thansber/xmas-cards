@@ -10,8 +10,8 @@ class GroupElement extends LitElement {
         }
 
         h2 {
-          background-color: rgb(0, 64, 0);
-          border: 1px solid rgb(192, 192, 192);
+          background-color: var(--xmas-green-light);
+          border: 1px solid var(--xmas-grey);
           font-size: 175%;
           font-weight: normal;
           margin: 0;
@@ -19,9 +19,16 @@ class GroupElement extends LitElement {
         }
 
         #connections {
-          border: 1px solid rgb(192, 192, 192);
+          border: 1px solid var(--xmas-grey);
           border-top: 0;
           padding: 0.75rem 1rem;
+        }
+      `,
+      css`
+        @media print {
+          h2 {
+            background-color: white;
+          }
         }
       `,
     ];

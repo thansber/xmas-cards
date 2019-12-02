@@ -18,6 +18,17 @@ class HeaderElement extends LitElement {
         #add {
           flex: 1;
         }
+
+        button {
+          margin-left: 1rem;
+        }
+      `,
+      css`
+        @media print {
+          :host {
+            display: none;
+          }
+        }
       `,
     ];
   }
@@ -26,9 +37,14 @@ class HeaderElement extends LitElement {
     return {};
   }
 
+  print() {
+    window.print();
+  }
+
   render() {
     return html`
       <xmas-add-connection id="add"></xmas-add-connection>
+      <button title="Print" @click="${this.print}">${icons.print}</button>
       <button title="Open Settings" @click="${this.showSettings}">${icons.settings}</button>
     `;
   }

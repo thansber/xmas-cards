@@ -46,6 +46,19 @@ const addConnectionToGroup = (connectionId, groupId) => {
   write({ groups: updated });
 };
 
+const addNewYear = () => {
+  const year = new Date().getFullYear();
+  const storedConnections = read().connections;
+  if (storedConnections.length && storedConnections[0].pings[0].year === year) {
+    return;
+  }
+  const connections = storedConnections.map(conn => ({
+    ...conn,
+    pings: [{ year }, ...conn.pings],
+  }));
+  write({ connections });
+};
+
 const autoPopulate = () => {
   newConnection('Parents');
   newConnection('Aunt Lisa');
@@ -185,6 +198,7 @@ const updateSettings = changes => {
 };
 
 export const IO = {
+  addNewYear,
   autoPopulate,
   deleteConnection,
   findConnection,

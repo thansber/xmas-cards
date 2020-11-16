@@ -9,8 +9,6 @@ class SettingsElement extends LitElement {
 
     this.minYears = 1;
     this.maxYears = 5;
-
-    this.saveMessage = null;
     this.yearInput = null;
   }
 
@@ -77,18 +75,22 @@ class SettingsElement extends LitElement {
           margin-top: 3rem;
         }
 
+        button {
+          margin-right: 0.75rem;
+        }
+
         .primary {
           font-size: 150%;
         }
 
-        #saveMessage {
+        .message {
           font-weight: normal;
-          margin-left: 2rem;
+          margin-left: 1rem;
           opacity: 0;
           transition: opacity 0.5s;
         }
 
-        #saveMessage.show {
+        .message.show {
           opacity: 1;
         }
       `,
@@ -99,6 +101,16 @@ class SettingsElement extends LitElement {
     return {
       numYears: { type: Number },
     };
+  }
+
+  addNewYear() {
+    this.dispatchEvent(
+      new Event('addYear', {
+        bubbles: true,
+        composed: true,
+      }),
+    );
+    this.hideSettings();
   }
 
   async applyFocus() {
@@ -137,7 +149,8 @@ class SettingsElement extends LitElement {
 
         <footer>
           <button class="primary" @click="${this.saveSettings}">Save</button>
-          <b id="saveMessage">Settings Saved</b>
+          <button class="primary" @click="${this.addNewYear}">New Year</button>
+          <b id="save-message" class="message">Settings Saved</b>
         </footer>
       </main>
     `;
@@ -163,12 +176,17 @@ class SettingsElement extends LitElement {
         },
       }),
     );
-    this.saveMessage.classList.add('show');
-    setTimeout(() => this.saveMessage.classList.remove('show'), 2500);
+
+    this.showMessage('save-message');
+  }
+
+  showMessage(id) {
+    const message = this.shadowRoot.getElementById(id);
+    message.classList.add('show');
+    setTimeout(() => message.classList.remove('show'), 2500);
   }
 
   updated() {
-    this.saveMessage = this.shadowRoot.getElementById('saveMessage');
     this.yearInput = this.shadowRoot.getElementById('yearInput');
   }
 }

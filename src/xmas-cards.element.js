@@ -54,6 +54,11 @@ class XmasCards extends LitElement {
     this.data = IO.read();
   }
 
+  onAddYear() {
+    IO.addNewYear();
+    this.data = IO.read();
+  }
+
   onAutoPopulate() {
     IO.autoPopulate();
     this.data = IO.read();
@@ -141,8 +146,9 @@ class XmasCards extends LitElement {
         id="settings"
         class="${this.settingsClasses()}"
         .numYears="${this.data.numTrackingYears}"
-        @toggleSettings="${this.onToggleSettings}"
+        @addYear="${this.onAddYear}"
         @saveSettings="${this.onSaveSettings}"
+        @toggleSettings="${this.onToggleSettings}"
       ></xmas-settings>
 
       ${this.renderTesting()}

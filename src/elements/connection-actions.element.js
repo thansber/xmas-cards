@@ -60,6 +60,7 @@ class ConnectionActionsElement extends LitElement {
     return {
       connection: Object,
       open: Boolean,
+      selectedConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -98,7 +99,19 @@ class ConnectionActionsElement extends LitElement {
   }
 
   toggleActions() {
-    this.open = !this.open;
+    this.dispatchEvent(
+      new CustomEvent('connectionActionsClick', {
+        bubbles: true,
+        composed: true,
+        detail: this.open ? 0 : this.connection.id,
+      }),
+    );
+  }
+
+  updated(changed) {
+    if (changed.has('selectedConnectionId') && this.connection) {
+      this.open = this.selectedConnectionId === this.connection.id;
+    }
   }
 }
 

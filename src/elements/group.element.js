@@ -37,8 +37,9 @@ class GroupElement extends LitElement {
   static get properties() {
     return {
       group: { type: Object },
-      renamingConnectionId: { type: Number, attribute: false },
       numYears: { type: Number },
+      renamingConnectionId: { type: Number, attribute: false },
+      selectedConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -52,6 +53,7 @@ class GroupElement extends LitElement {
         id="connections"
         .connections="${connections}"
         .renamingConnectionId="${this.renamingConnectionId}"
+        .selectedConnectionId="${this.selectedConnectionId}"
         .numYears="${this.numYears}"
       ></xmas-connections>
     `;

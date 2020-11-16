@@ -28,8 +28,9 @@ class GroupsElement extends LitElement {
   static get properties() {
     return {
       groups: { type: Array },
-      renamingConnectionId: { type: Number, attribute: false },
       numYears: { type: Number },
+      renamingConnectionId: { type: Number, attribute: false },
+      selectedConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -52,6 +53,7 @@ class GroupsElement extends LitElement {
             <xmas-group
               .group="${group}"
               .renamingConnectionId="${this.renamingConnectionId}"
+              .selectedConnectionId="${this.selectedConnectionId}"
               .numYears="${this.numYears}"
             ></xmas-group>
           `,

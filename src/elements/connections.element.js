@@ -52,6 +52,7 @@ class ConnectionsElement extends LitElement {
       nameError: { type: Boolean },
       numYears: { type: Number },
       renamingConnectionId: { type: Number, attribute: false },
+      selectedConnectionId: { type: Number, attribute: false },
     };
   }
 
@@ -113,7 +114,7 @@ class ConnectionsElement extends LitElement {
     return html`
       <section id="view">
         <xmas-connection .connection="${connection}" .numYears="${this.numYears}"></xmas-connection>
-        <xmas-connection-actions .connection="${connection}"></xmas-connection-actions>
+        <xmas-connection-actions .connection="${connection}" .selectedConnectionId="${this.selectedConnectionId}"></xmas-connection-actions>
       </section>
     `;
   }

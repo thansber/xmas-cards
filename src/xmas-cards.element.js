@@ -11,8 +11,12 @@ class XmasCards extends LitElement {
 
     this.data = IO.read();
     this.renamingConnectionId = -1;
+    this.selectedConnectionId = 0;
     this.settingsShown = false;
     this.testing = /testing/.test(window.location.search);
+
+    this.groupElementRegex = /xmas-groups/i;
+    this.addEventListener('click', this.onClick);
   }
 
   static get styles() {
@@ -40,6 +44,7 @@ class XmasCards extends LitElement {
     return {
       data: { type: Object },
       renamingConnectionId: { type: Number },
+      selectedConnectionId: { type: Number },
       settingsShown: { type: Boolean },
     };
   }
@@ -57,6 +62,18 @@ class XmasCards extends LitElement {
   onClearAll() {
     IO.nukeEverything();
     this.data = IO.read();
+  }
+
+  onClick(e) {
+    // On click outside of groups, clear selected connection
+    // This closes any open actions
+    if (!e.composedPath().map(elem => elem.localName).includes('xmas-groups')) {
+      this.selectedConnectionId = 0;
+    }
+  }
+
+  onConnectionActionsClick(e) {
+    this.selectedConnectionId = e.detail;
   }
 
   onDeleteConnection(e) {
@@ -110,7 +127,9 @@ class XmasCards extends LitElement {
       <xmas-groups
         .groups="${this.data.groups}"
         .renamingConnectionId="${this.renamingConnectionId}"
+        .selectedConnectionId="${this.selectedConnectionId}"
         .numYears="${this.data.numTrackingYears}"
+        @connectionActionsClick="${this.onConnectionActionsClick}"
         @deleteConnection="${this.onDeleteConnection}"
         @renameCancel="${this.onRenameCancel}"
         @renameConnection="${this.onRenameConnection}"

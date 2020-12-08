@@ -47,16 +47,23 @@ const addConnectionToGroup = (connectionId, groupId) => {
 };
 
 const addNewYear = () => {
-  const year = new Date().getFullYear();
-  const storedConnections = read().connections;
-  if (storedConnections.length && storedConnections[0].pings[0].year === year) {
-    return;
+  const currentYear = new Date().getFullYear();
+  const data = read();
+
+  if (data.currentYear !== currentYear) {
+    write({ currentYear });
   }
-  const connections = storedConnections.map(conn => ({
-    ...conn,
-    pings: [{ year }, ...conn.pings],
-  }));
-  write({ connections, currentYear: year });
+
+  const connections = data.connections.map(conn => {
+    if (conn.pings[0].year === currentYear) {
+      return conn;
+    }
+    return {
+      ...conn,
+      pings: [{ year: currentYear }, ...conn.pings],
+    };
+  });
+  write({ connections });
 };
 
 const autoPopulate = () => {

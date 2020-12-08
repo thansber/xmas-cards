@@ -56,7 +56,7 @@ const addNewYear = () => {
     ...conn,
     pings: [{ year }, ...conn.pings],
   }));
-  write({ connections });
+  write({ connections, currentYear: year });
 };
 
 const autoPopulate = () => {
